@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pagina di accesso</title>
+   <!-- Collegamento al file CSS esterno -->
+   <link rel="stylesheet" type="text/css" href="stylesacc.css">
+
+    <script>
+        function mostraForm(tipo) {
+            document.getElementById('formUtente').style.display = tipo === 'utente' ? 'block' : 'none';
+            document.getElementById('formAmministratore').style.display = tipo === 'amministratore' ? 'block' : 'none';
+            document.getElementById('formRegistrazioneutente').style.display = tipo === 'Registra_utente' ? 'block' : 'none';
+        }
+    </script>
+
+<script>
+    function verificaCredenzialiamministratore() {
+        var nomeUtente = document.getElementById('nomeUtente').value;
+        var passwordUtente = document.getElementById('passwordUtente').value;
+
+        // Confronto delle credenziali
+        if (nomeUtente === 'admin' && passwordUtente === '12345') {
+            // Se le credenziali sono corrette, reindirizza alla pagina dell'amministratore
+            window.location.href = "amministratore.php";
+            return false; // Impedisce l'invio del modulo
+        } else {
+            // Se le credenziali non sono corrette, mostra un messaggio di errore
+            alert("Credenziali non valide. Riprova.");
+            // Svuota i campi nome e password
+            document.getElementById('nomeUtente').value = '';
+            document.getElementById('passwordUtente').value = '';
+            return false; // Impedisce l'invio del modulo
+        }
+    }
+</script>
+
+</head>
+<body>
+    <h2>Seleziona il tipo di accesso</h2>
+    <button onclick="mostraForm('utente')">Accesso Utente</button>
+    <button onclick="mostraForm('amministratore')">Accesso Amministratore</button>
+    <button onclick="mostraForm('Registra_utente')">Registrazione utente</button>
+
+    <div id="formAmministratore" class="form-container">
+        <h2>Inserisci le credenziali amministratore</h2>
+        <form onsubmit="return verificaCredenzialiamministratore()">
+            <label for="nomeUtente">Nome:</label>
+            <input type="text" id="nomeUtente" name="Nome_utente" placeholder="Inserisci il tuo nome">
+            <br>
+            <label for="passwordUtente">Password:</label>
+            <input type="password" id="passwordUtente" name="Password_utente" placeholder="Inserisci la tua password">
+            <br>
+            <input type="submit" value="Accedi">
+        </form>
+    </div>
+
+    <div id="formUtente" class="form-container">
+        <h2>Inserisci le tue credenziali</h2>
+        <form action="accedi.php" method="POST">
+            <label for="EmailUtente">Email:</label>
+            <input type="text" id="EmailUtente2" name="Email_utente2" placeholder="Inserisci la tua email">
+            <br>
+            <label for="passwordUtente">Password:</label>
+            <input type="password" id="passwordUtente2" name="Password_utente2" placeholder="Inserisci la tua password">
+            <br>
+            <input type="submit" value="Accedi">
+        </form>
+    </div>
+
+    <div id="formRegistrazioneutente" class="form-container">
+        <h2>Inserisci le credenziali per registrarti</h2>
+        <form action="Registrazione.php" method="POST">
+            <label for="EmailRegistrazione">Email:</label>
+            <input type="text" id="Emailregistrazione" name="Email_registrazione" placeholder="Inserisci la tua email" required>
+            <br>
+            <label for="passwordRegistrazione">Password:</label>
+            <input type="password" id="passwordRegistrazione" name="Password_Registrazione" placeholder="Inserisci la tua password" required>
+            <br>
+            <label for="nomeRegistrazione">Nome:</label>
+            <input type="text" id="nomeregistrazione" name="Nome_registrazione" placeholder="Inserisci il tuo nome" required>
+            <br>
+            <label for="CognomeRegistrazione">Cognome:</label>
+            <input type="text" id="Cognomeregistrazione" name="Cognome_registrazione" placeholder="Inserisci il tuo cognome" required>
+            <br>
+            <input type="submit" value="Registrati">
+        </form>
+    </div>
+
+</body>
+</html>
